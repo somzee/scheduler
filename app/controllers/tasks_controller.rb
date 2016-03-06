@@ -1,7 +1,11 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open")
+    if params[:include_future]
+      @tasks = Task.where(status: "Open")
+    else
+      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open")
+    end
   end
 
   def new

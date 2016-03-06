@@ -1,6 +1,8 @@
 <h1>To-Do List</h1>
 
 <h3><%= link_to "Add a task", new_task_path(@task)%></h3>
+<h3><%= link_to "Include future tasks", tasks_path(include_future: "true")%></h3>
+
 
 <% if flash[:errors].present? %>
 	<p id="errors"><%= flash[:errors].join("</br>") %></p>
