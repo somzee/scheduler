@@ -2,14 +2,6 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :tasks
-
-  resources :tasks do
-    member do
-      get 'mark_as_done'
-    end
-  end
-
   resources :tasks do
     member do
       patch 'mark_as_done'
