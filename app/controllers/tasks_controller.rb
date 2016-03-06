@@ -9,8 +9,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task_params)
-    # Task.create(task_params.merge(status: "Open"))
+    task = Task.create(task_params)
+    if task.errors.present?
+      flash[:error] = task.errors.full_messages
+    end  
     redirect_to tasks_path
   end
 

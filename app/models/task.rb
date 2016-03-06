@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
 
+  validates :name, presence: true
   before_create :set_defaults
 
   private
