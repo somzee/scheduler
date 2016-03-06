@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   def create
     task = Task.create(task_params)
     if task.errors.present?
-      flash[:error] = task.errors.full_messages
+      flash[:errors] = task.errors.full_messages
     end  
     redirect_to tasks_path
   end
