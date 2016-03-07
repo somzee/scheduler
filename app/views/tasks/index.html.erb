@@ -3,7 +3,7 @@
 
 <h1>To-Do List</h1>
 
-<h3> <%= link_to "Add a task", new_task_path(@task)%> </h3>
+<%= render "form" %>
 
 <% if flash[:errors].present? %>
 	<div class="alert alert-danger" role="alert" id="errors"><%= flash[:errors].join("</br>") %></div>
@@ -14,28 +14,28 @@
 <ul class="list-group">
     <h4> Past-due items </h4>
   <% @past_due_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %>&emsp;<%= task.name%></li>
+    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp;<%= task.name%></li>
   <% end %>
 </ul>
 
 <ul class="list-group">
     <h4> Today's to-do list </h4>
   <% @today_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %> &emsp;<%= task.name%> </li>
+    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp;<%= task.name%> </li>
   <% end %>
 </ul>
 
 <ul class="list-group">
     <h4> Due tomorrow and later </h4>
   <% @future_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %>&emsp; <%= task.name%></li>
+    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp; <%= task.name%></li>
   <% end %>
 </ul>
 
 <ul class="list-group">
     <h4> Completed tasks </h4>
   <% @completed_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-minus"></span>'.html_safe, mark_as_open_task_path(task), method: :patch, class: 'btn btn-warning btn-xs' %>&emsp;<%= task.name%></li>
+    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-minus"></span>'.html_safe, mark_as_open_task_path(task), method: :patch, class: 'btn btn-warning btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp;<%= task.name%></li>
   <% end %>
 </ul>
 
