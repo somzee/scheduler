@@ -1,16 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <h1>To-Do List</h1>
-
-<h3><%= link_to "Add a task", new_task_path(@task)%></h3>
-<h3><%= link_to "Include future tasks", tasks_path(include_future: "true")%></h3>
-
 
 <% if flash[:errors].present? %>
 	<p id="errors"><%= flash[:errors].join("</br>") %></p>
 <% end %>
 
+
 <% @tasks.each do |task| %>
-  <li><%= task.name%> <%= task.due_date %> <%= link_to "Done", mark_as_done_task_path(task), method: :patch %> <%= link_to "Edit", edit_task_path(task)%> </li>
+  <ul><%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), method: :patch, class: 'btn btn-small' %> <%= task.name%> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), class: 'btn btn-small' %> </ul>
 <% end %>
 
 
+<h5>
+  <%= link_to "Add a task", new_task_path(@task)%>
+</br>
+  <%= link_to "Include future tasks", tasks_path(include_future: "true")%>
+</h5>
+
+</html>
 
