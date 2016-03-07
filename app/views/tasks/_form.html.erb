@@ -1,15 +1,13 @@
 <%= form_for @task do |f| %>
-	<div>
-    <%= f.label :due_date %>
+  <div class="form-group">
+    <label><%= f.label :"To-do" %></label>
+    <%= f.text_field :name %>
+  </div>
+	<div class="form-group">
+    <label><%= f.label :due_date %></label>
     <%= f.date_field :due_date %>
   </div>
-  <br/>
   <div>
-    <%= f.label :task %>
-    <%= f.text_area :name %>
-  </div>
-  <br/>
-  <div>
-    <%= f.submit %>
+    <%= f.submit%>
   </div>
 <% end %>

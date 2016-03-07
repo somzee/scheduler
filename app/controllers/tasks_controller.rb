@@ -1,11 +1,15 @@
 class TasksController < ApplicationController
 
   def index
-    if params[:include_future]
-      @tasks = Task.where(status: "Open")
-    else
+    # if params[:include_future]
+    #   @tasks = Task.where(status: "Open")
+    # else
       @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open")
-    end
+      @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open")
+      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open")
+      @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open")
+      @completed_tasks = Task.where(status: "Done")
+    # end
   end
 
   def new
@@ -35,6 +39,13 @@ class TasksController < ApplicationController
     @task.update_attributes(status: "Done")
     redirect_to tasks_path
   end
+
+  def mark_as_open
+    @task = Task.find(params[:id])
+    @task.update_attributes(status: "Open")
+    redirect_to tasks_path
+  end
+
 
   private
 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :tasks do
     member do
       patch 'mark_as_done'
+      patch 'mark_as_open'
     end
   end
 
