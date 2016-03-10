@@ -4,9 +4,9 @@ class TasksController < ApplicationController
     # if params[:include_future]
     #   @tasks = Task.where(status: "Open")
     # else
-      @tasks = Task.where("due_date <= ? OR due_date = ?", Date.today, nil).where(status: "Open").sort_by(&:created_at)
+      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").sort_by(&:created_at)
       @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").sort_by(&:due_date)
-      @today_tasks = Task.where("due_date <= ? OR due_date = ?", Date.today, nil).where(status: "Open").sort_by(&:created_at)
+      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").sort_by(&:created_at)
       @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").sort_by(&:due_date)
       @completed_tasks = Task.where(status: "Done")
     # end
