@@ -17,39 +17,61 @@
     <li class="list-group-item"> You don't have any past-due items. </li>
   <% end %>
   <% @past_due_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task),title: 'Mark as done', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :patch, class: 'btn btn-success btn-xs'%> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), title: 'Edit', 'data-toggle' => 'tooltip','data-placement' => 'bottom', class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task), title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp;<%= task.name%></li>
+    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task),title: 'Mark as done', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :patch, class: 'btn btn-success btn-sm'%> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task), title: 'Edit', 'data-toggle' => 'tooltip','data-placement' => 'bottom', class: 'btn btn-info btn-sm' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task), title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: 'btn btn-danger btn-sm' %>&emsp;<%= task.name%></li>
   <% end %>
 </ul>
 
 <ul class="list-group">
     <h4> Today's to-do list </h4>
   <% if @today_tasks.empty? %>
-    <li class="list-group-item"> You don't have any to-do tasks today. </li>
+    <li class="list-group-item"> Nothing on your to-do list for today! </li>
   <% end %>
   <% @today_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task),title: 'Mark as done', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task),title: 'Edit', 'data-toggle' => 'tooltip','data-placement' => 'bottom', class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task),title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp;<%= task.name%> </li>
+    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task),title: 'Mark as done', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :patch, class: 'btn btn-success btn-sm' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task),title: 'Edit', 'data-toggle' => 'tooltip','data-placement' => 'bottom', class: 'btn btn-info btn-sm' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task),title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: 'btn btn-danger btn-sm' %>&emsp;<%= task.name%> </li>
   <% end %>
 </ul>
 
-<ul class="list-group">
-    <h4> Due tomorrow and later </h4>
-  <% if @future_tasks.empty? %>
-    <li class="list-group-item"> Nothing on your to-do list for tomorrow and later. </li>
-  <% end %>
-  <% @future_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), title: 'Mark as done', 'data-toggle' => 'tooltip','data-placement' => 'bottom',method: :patch, class: 'btn btn-success btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task),title: 'Edit', 'data-toggle' => 'tooltip','data-placement' => 'bottom', class: 'btn btn-info btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task),title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp; <%= task.name%></li>
-  <% end %>
-</ul>
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">Due later</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <ul class="list-group">
+          <!--<h4> Due tomorrow and later </h4> -->
+        <% if @future_tasks.empty? %>
+          <li class="list-group-item"> Nothing on your to-do list for later. </li>
+        <% end %>
+        <% @future_tasks.each do |task| %>
+          <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-check"></span>'.html_safe, mark_as_done_task_path(task), title: 'Mark as done', 'data-toggle' => 'tooltip','data-placement' => 'bottom',method: :patch, class: 'btn btn-success btn-sm' %> <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_task_path(task),title: 'Edit', 'data-toggle' => 'tooltip','data-placement' => 'bottom', class: 'btn btn-info btn-sm' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task),title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: 'btn btn-danger btn-sm' %>&emsp; <%= task.due_date.to_formatted_s(:long) %>  - <%= task.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
-<ul class="list-group">
-    <h4> Completed tasks </h4>
-  <% if @completed_tasks.empty? %>
-    <li class="list-group-item"> You don't have any completed tasks. </li>
-  <% end %>
-  <% @completed_tasks.each do |task| %>
-    <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-minus"></span>'.html_safe, mark_as_open_task_path(task),title: 'Mark as open', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :patch, class: 'btn btn-warning btn-xs' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task),title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' %>&emsp;<%= task.name%></li>
-  <% end %>
-</ul>
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse2">Done</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <ul class="list-group">
+          <!-- <h4> Completed tasks </h4> -->
+        <% if @completed_tasks.empty? %>
+          <li class="list-group-item"> You don't have any completed tasks. </li>
+        <% end %>
+        <% @completed_tasks.each do |task| %>
+          <li class="list-group-item"> <%= link_to '<span class="glyphicon glyphicon-minus"></span>'.html_safe, mark_as_open_task_path(task),title: 'Mark as open', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :patch, class: 'btn btn-warning btn-sm' %> <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, task_path(task),title: 'Delete', 'data-toggle' => 'tooltip','data-placement' => 'bottom', method: :delete, data: { confirm: 'Are you sure you want to delete this task?' }, class: 'btn btn-danger btn-sm' %>&emsp;<%= task.name%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
 </html>
 

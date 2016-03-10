@@ -4,10 +4,10 @@ class TasksController < ApplicationController
     # if params[:include_future]
     #   @tasks = Task.where(status: "Open")
     # else
-      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open")
-      @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open")
-      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open")
-      @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open")
+      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").sort_by(&:created_at)
+      @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").sort_by(&:due_date)
+      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").sort_by(&:created_at)
+      @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").sort_by(&:due_date)
       @completed_tasks = Task.where(status: "Done")
     # end
   end
