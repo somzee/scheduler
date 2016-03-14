@@ -6,10 +6,10 @@ class TasksController < ApplicationController
     # if params[:include_future]
     #   @tasks = Task.where(status: "Open")
     # else
-      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").sort_by(&:created_at)
-      @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").sort_by(&:due_date)
-      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").sort_by(&:created_at)
-      @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").sort_by(&:due_date)
+      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:created_at)
+      @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:due_date)
+      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:created_at)
+      @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:due_date)
       @completed_tasks = Task.where(status: "Done")
     # end
   end
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.create(task_params)
+    task = Task.create(task_params.merge(user_id: current_user.id))
     if task.errors.present?
       flash[:errors] = task.errors.full_messages
     end  

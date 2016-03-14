@@ -2,7 +2,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name, :user_id, presence: true
   before_create :set_defaults
   before_update do 
   	self.due_date = Date.today if self.due_date.nil?

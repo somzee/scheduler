@@ -22,6 +22,11 @@
 
 <body>
 
+<% if flash[:errors].present? %>
+  </br>
+  <div class="alert alert-danger" role="alert" id="errors"><%= Array(flash[:errors]).join("<br/>").html_safe %></div>
+<% end %>
+
 <%= yield %>
 
 </body>

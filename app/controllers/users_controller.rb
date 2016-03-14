@@ -8,8 +8,11 @@ class UsersController < ApplicationController
   @user = User.create(user_params) 
     if @user.errors.present?
       flash[:errors] = @user.errors.full_messages
+      redirect_to signup_path
+    else
+      session[:user_id] = @user.id
+      redirect_to tasks_path
     end
-    redirect_to tasks_path
   end
 
 private
