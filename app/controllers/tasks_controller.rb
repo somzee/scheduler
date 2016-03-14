@@ -10,7 +10,7 @@ class TasksController < ApplicationController
       @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:due_date)
       @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:created_at)
       @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").where(user_id: current_user.id).sort_by(&:due_date)
-      @completed_tasks = Task.where(status: "Done")
+      @completed_tasks = Task.where(status: "Done").where(user_id: current_user.id)
     # end
   end
 
