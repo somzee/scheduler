@@ -1,5 +1,7 @@
 class Task < ActiveRecord::Base
 
+  belongs_to :user
+
   validates :name, presence: true
   before_create :set_defaults
   before_update do 

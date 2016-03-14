@@ -1,0 +1,15 @@
+
+</br>
+
+<%= form_for :session, url: login_path, html: {class: 'form-inline'} do |f| %>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, :class => "form-control input-lg"%>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.text_field :password_digest, :class => "form-control input-lg"%>
+    &emsp;
+  <div class="input-group">
+    <%= f.submit :value => "Log in", class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>

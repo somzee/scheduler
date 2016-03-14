@@ -1,0 +1,17 @@
+
+</br>
+
+<%= form_for :user, html: {class: 'form-inline'}, :url => { :action => 'create' } do |f| %>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, :class => "form-control input-lg"%>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.text_field :password, :class => "form-control input-lg"%>
+    &emsp;
+  <div class="input-group">
+    <%= f.submit :value => "Sign-up!", class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>
+
+ 

@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+  before_action :require_user
+
   def index
     # if params[:include_future]
     #   @tasks = Task.where(status: "Open")
