@@ -3,15 +3,11 @@ class TasksController < ApplicationController
   before_action :require_user
 
   def index
-    # if params[:include_future]
-    #   @tasks = Task.where(status: "Open")
-    # else
-      @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:created_at)
-      @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:due_date)
-      @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:created_at)
-      @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:due_date)
-      @completed_tasks = Task.where(status: "Done").where(user_id: current_user.id).order(:due_date)
-    # end
+    @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:created_at)
+    @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:due_date)
+    @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:created_at)
+    @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:due_date)
+    @completed_tasks = Task.where(status: "Done").where(user_id: current_user.id).order(:due_date)
   end
 
   def new
