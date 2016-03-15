@@ -3,11 +3,10 @@ class TasksController < ApplicationController
   before_action :require_user
 
   def index
-    @tasks = Task.where("due_date <= ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:created_at)
-    @past_due_tasks = Task.where("due_date < ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:due_date)
-    @today_tasks = Task.where("due_date = ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:created_at)
-    @future_tasks = Task.where("due_date > ?", Date.today).where(status: "Open").where(user_id: current_user.id).order(:due_date)
-    @completed_tasks = Task.where(status: "Done").where(user_id: current_user.id).order(:due_date)
+    @past_due_tasks  = current_user.tasks.open.past.sorted.to_a
+    @today_tasks     = current_user.tasks.due_today.open.sorted.to_a
+    @future_tasks    = current_user.tasks.future.open.sorted.to_a
+    @completed_tasks = current_user.tasks.done.sorted.to_a
   end
 
   def new
